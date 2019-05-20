@@ -1,32 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>AJAX fetch Data</title>
-</head>
-<body>
-  
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AJAX fetch Data</title>
+  </head>
+  <body>
 
-<script>
-  let xhr = new XMLHttpRequest();
-  xhr.open('GET', 'http://opendata2.epa.gov.tw/UV/UV.json', true);
-  xhr.onload = () => { 
-  document.getElementById('content').innerHTML = JSON.stringify(xhr.responseText).replace(/"/g,'').split(/\\/).join('').replace(/},{/g,'}<br>{')
-   };
-                      
-  xhr.send(null);
-  
-  </script>
-   
-  <div id="content"></div>
-  
-</body>
+    <pre>
+      <code id="content"></code>
+    </pre>
+
+    <script>
+      let xhr = new XMLHttpRequest();
+      xhr.open('GET', 'http://opendata2.epa.gov.tw/UV/UV.json', true);
+      xhr.onload = () => {
+        // document.getElementById('content').innerHTML = JSON.stringify(xhr.responseText).replace(/"/g,'').split(/\\/).join('').replace(/},{/g,'}<br>{');
+        document.getElementById('content').innerHTML = JSON.stringify(JSON.parse(xhr.responseText), null, 4).replace(/"/g,'');
+      };
+
+      xhr.send(null);
+    </script>
+
+  </body>
 </html>
-
-
-
-
-
-
